@@ -36,6 +36,11 @@
                         placeholder="@lang('Confirm your Password')"
                         required>
                 </div>
+                <!-- RGPD -->
+                <x-auth.rgpd-checkbox />
+                @section('scripts')
+                    <x-auth.rgpd-script />
+                @endsection
                 <x-auth.submit title="Register" />
 
             </form>

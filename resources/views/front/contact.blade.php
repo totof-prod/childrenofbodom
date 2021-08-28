@@ -35,6 +35,10 @@
                             <label for="message">@lang('Your Message')</label>
                             <textarea name="message" id="message" class="h-full-width" placeholder="@lang('Your Message')" required>{{ old('message') }}</textarea>
                             <br>
+
+                            @if(Auth::guest())
+                                <x-auth.rgpd-checkbox />
+                            @endif
                             <x-auth.submit title="Send" />
                         </fieldset>
                     </form>
@@ -43,3 +47,10 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    @if(Auth::guest())
+        <x-auth.rgpd-script />
+    @endif
+@endsection
+
+

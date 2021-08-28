@@ -49,4 +49,18 @@ if (!function_exists('isRole')) {
         return auth()->user()->role === $role;
     }
 }
+if (!function_exists('formatHour')) {
+    function formatHour($date)
+    {
+        return ucfirst(utf8_encode ($date->formatLocalized('%Hh%M')));
+    }
+}
+if (!function_exists('getUrlSegment')) {
+    function getUrlSegment($url, $segment)
+    {
+        $url_path = parse_url(request()->url(), PHP_URL_PATH);
+        $url_segments = explode('/', $url_path);
+        return $url_segments[$segment];
+    }
+}
 

@@ -40,18 +40,14 @@
 
 
     <!-- preloader
-    ================================================== -->
+    ==================================================
     <div id="preloader">
     	<div id="loader"></div>
     </div>
-
+    -->
 
     <header class="s-header @unless(currentRoute('home')) s-header--opaque @endunless">
-        <div class="s-header__logo">
-            <a class="logo" href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.svg') }}" alt="Homepage">
-            </a>
-        </div>
+
         <div class="row s-header__navigation">
             <nav class="s-header__nav-wrap">
                 <h3 class="s-header__nav-heading h6">@lang('Navigate to')</h3>
@@ -90,26 +86,38 @@
                         </li>
                         @endrequest
                     @else
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST" hidden>
-                                @csrf
-                            </form>
-                            <a
-                                href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); this.previousElementSibling.submit();">
-                                @lang('Logout')
-                            </a>
-                        </li>
-                            @if(auth()->user()->role != 'user')
+                        <li class="has-children">
+                            <a href="#" title="">{{ auth()->user()->name }}</a>
+                            <ul class="sub-menu">
                                 <li>
-                                    <a href="{{ url('admin') }}">@lang('Administration')</a>
+                                    <form action="{{ route('logout') }}" method="POST" hidden>
+                                        @csrf
+                                    </form>
+                                    <a
+                                        href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); this.previousElementSibling.submit();">
+                                        @lang('Logout')
+                                    </a>
                                 </li>
-                            @endif
+                                <li><a href="{{ url('profile') }}">@lang('Profile')</a></li>
+                                @if(auth()->user()->role != 'user')
+                                    <li>
+                                        <a href="{{ url('admin') }}">@lang('Administration')</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+
                     @endguest
                 </ul>
                 </ul>
                 <a href="#0" title="@lang('Close Menu')" class="s-header__overlay-close close-mobile-menu">@lang('Close')</a>
             </nav>
+        </div>
+        <div class="s-header__logo">
+            <a class="logo" href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.svg') }}" alt="Homepage">
+            </a>
         </div>
         <a class="s-header__toggle-menu" href="#0" title="@lang('Menu')"><span>@lang('Menu')</span></a>
         <div class="s-header__search">
